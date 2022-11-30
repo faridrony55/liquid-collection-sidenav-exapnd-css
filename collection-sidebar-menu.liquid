@@ -1,0 +1,118 @@
+<div class="collection_sidebar_nav">
+  
+<strong>Categories__</strong>
+<ul class="menu">
+   
+  {% for link in section.settings.menu.links %}
+    <li class="menu-link">
+      
+    {% if link.links.size > 0 %}
+      <a class="submenu" href="javascript:void(0);">{{ link.title }}</a> 
+    {% else %} 
+      <a href="{{ link.url }}">{{ link.title }}</a>  
+    {% endif %}
+    
+      {% if link.links.size > 0 %}
+        <ul class="menu dropdown-child">
+          {% for child_link in link.links %}
+            <li class="menu-link">
+
+               {% if child_link.links.size > 0 %}
+                  <a class="child_submenu" href="javascript:void(0);">{{ child_link.title }}</a> 
+                {% else %} 
+                  <a href="{{ child_link.url }}">{{ child_link.title }}</a>  
+                {% endif %}
+            
+
+              {% if child_link.links.size > 0 %}
+                <ul class="menu dropdown-grandchild">
+                  {% for grandchild_link in child_link.links %}
+                    <li class="menu-link">
+                      <a href="{{ grandchild_link.url }}">{{ grandchild_link.title }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+   
+  $(function(){
+     $(".collection_sidebar_nav .menu.dropdown-child, .collection_sidebar_nav  .menu.dropdown-grandchild").css({"display":"none"});
+    // $(".collection_sidebar_nav > .menu > .menu-link > a").css({"pointer-events":"none", "pointer":"default" })
+    
+    $(".collection_sidebar_nav .menu .menu-link a.submenu").click(function(){
+       $(this).toggleClass("expand");
+       $(this).next(".menu.dropdown-child").toggle();
+    });
+    $(".collection_sidebar_nav .menu .menu-link a.child_submenu").click(function(){
+       $(this).toggleClass("expand");
+       $(this).next(".menu.dropdown-grandchild").toggle();
+    });
+    
+  });
+</script>
+<style>
+  .search-form { 
+    margin-bottom: 22px;
+}
+ .shopify-section section .container.module-inner .collection-header-wrapper { 
+    margin-bottom: 0px !important;
+}
+  .custom_side {
+    background-color: #f5f5f5; 
+    padding: 20px 20px 20px;
+    width: 100%;
+}
+  .collection_sidebar_nav{}
+.collection_sidebar_nav strong {
+    font-size: 18px;
+    font-weight: bolder;
+    letter-spacing: 1px;
+}
+.collection_sidebar_nav ul {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.collection_sidebar_nav ul li {
+    margin: 4px 0;
+}
+  .collection_sidebar_nav ul li a {
+    color: #202020;
+    font-weight: 300;
+    display:block
+}
+.collection_sidebar_nav ul li ul li a:hover {
+    transform: translateX(8px);
+}
+
+.collection_sidebar_nav  .menu  .menu-link > a.submenu,
+.collection_sidebar_nav  .menu  .menu-link > a.child_submenu{
+  position: relative;
+}
+.collection_sidebar_nav   .menu   .menu-link > a.submenu::after,
+.collection_sidebar_nav   .menu   .menu-link > a.child_submenu::after {
+    content: "+";
+    right: 0;
+    position: absolute;
+}
+.collection_sidebar_nav   .menu   .menu-link > a.expand::after {
+    content: "-"; 
+}
+/* .collection_sidebar_nav > .menu > .menu-link > .menu.dropdown-child{
+   
+  display:none
+}
+.collection_sidebar_nav > .menu > .menu-link > a:focus + .menu.dropdown-child{
+   
+ display:block
+} */
+</style>
