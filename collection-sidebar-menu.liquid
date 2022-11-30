@@ -91,7 +91,7 @@
     display:block
 }
 .collection_sidebar_nav ul li ul li a:hover {
-    transform: translateX(8px);
+/*     transform: translateX(8px); */
 }
 
 .collection_sidebar_nav  .menu  .menu-link > a.submenu,
@@ -104,7 +104,8 @@
     right: 0;
     position: absolute;
 }
-.collection_sidebar_nav   .menu   .menu-link > a.expand::after {
+.collection_sidebar_nav   .menu   .menu-link > a.submenu.expand::after,
+.collection_sidebar_nav   .menu   .menu-link > a.child_submenu.expand::after {
     content: "-"; 
 }
 /* .collection_sidebar_nav > .menu > .menu-link > .menu.dropdown-child{
