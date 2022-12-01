@@ -1,7 +1,10 @@
 <div class="collection_sidebar_nav">
   
-<strong>Categories__</strong>
+<strong>Sticker Categories__</strong>
+ 
+  
 <ul class="menu">
+  <span class="close"> x</span>
    
   {% for link in section.settings.menu.links %}
     <li class="menu-link">
@@ -46,21 +49,36 @@
 <script>
    
   $(function(){
+    var applied = false;
      $(".collection_sidebar_nav .menu.dropdown-child, .collection_sidebar_nav  .menu.dropdown-grandchild").css({"display":"none"});
+     $(".collection_sidebar_nav .menu .menu-link a.submenu + .menu.dropdown-child").css({"display":"block"});
     // $(".collection_sidebar_nav > .menu > .menu-link > a").css({"pointer-events":"none", "pointer":"default" })
     
     $(".collection_sidebar_nav .menu .menu-link a.submenu").click(function(){
+      
        $(this).toggleClass("expand");
        $(this).next(".menu.dropdown-child").toggle();
+       
     });
     $(".collection_sidebar_nav .menu .menu-link a.child_submenu").click(function(){
        $(this).toggleClass("expand");
        $(this).next(".menu.dropdown-grandchild").toggle();
+       
+    });
+    $(".collection_sidebar_nav > strong").click(function(){
+      $(".collection_sidebar_nav > .menu").toggleClass("visible");
+    });
+    $(".collection_sidebar_nav > .menu .close").click(function(){
+      $(".collection_sidebar_nav > .menu").removeClass("visible");
     });
     
   });
 </script>
 <style>
+
+ .template-product .main-content { 
+    font-size: inherit !important;
+}
   .search-form { 
     margin-bottom: 22px;
 }
@@ -93,7 +111,15 @@
 .collection_sidebar_nav ul li ul li a:hover {
 /*     transform: translateX(8px); */
 }
-
+.collection_sidebar_nav  .menu  .menu-link .menu.dropdown-child {
+    padding-left: 10px;
+    opacity: 0.8;
+}
+ .collection_sidebar_nav  .menu  .menu-link  .menu.dropdown-grandchild{
+    padding-left: 10px;
+    opacity: 0.7;
+    
+  }
 .collection_sidebar_nav  .menu  .menu-link > a.submenu,
 .collection_sidebar_nav  .menu  .menu-link > a.child_submenu{
   position: relative;
@@ -116,4 +142,75 @@
    
  display:block
 } */
+.close{
+  display:none;
+}
+
+@media only screen and (max-width: 1020px){
+.close {
+    display: inline-block;
+    position: absolute;
+    top: -5px;
+    right: 13px;
+    font-size: 20px;
+    cursor: pointer;
+}
+  .custom_side {
+      display: block;
+  }
+  .collection_sidebar_nav .menu{
+/*     display:none; */
+  }
+  .mobile-toggle{
+    display:none !important;
+    
+  }
+  .collection_sidebar_nav > .menu {
+    position: fixed;
+    background: whitesmoke;
+    width: 90%;
+    height: auto;
+    z-index: 9;
+    opacity: 1;
+    bottom: 20px;
+    right: -200px;
+    padding: 25px;
+    visibility:hidden;
+    opacity:0;
+    transform: translate(50%);
+    height: calc(90vh - 75px);
+    overflow: overlay;
+    border-radius:5px;
+    box-shadow:0 0 10px #0000001a;
+}
+.collection_sidebar_nav > .menu.visible {
+    right: 50%;
+    visibility: visible;
+    opacity: 1;
+}
+  .collection_sidebar_nav  .menu  .menu-link .menu.dropdown-child {
+    padding-left: 10px;
+    opacity: 1;
+}
+ .collection_sidebar_nav  .menu  .menu-link  .menu.dropdown-grandchild{
+    padding-left: 10px;
+    opacity: 1;
+    
+  }
+  .shopify-section.section-product .custom_side.productpage{
+    margin-bottom: 30px;
+  }
+  .shopify-section.section-product .custom_side.productpage .custom_side {
+    padding: 0 0 0; 
+}
+}
 </style>
+
+
+
+
+
+
+
+
+
